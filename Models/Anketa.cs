@@ -17,6 +17,20 @@ namespace Anketa
         }
 
         public void sumOfcredit(string numberPassport,outUser newAcc){
+            if(Credit.Credits.haveAactuallCredit(newAcc.idPassport)){
+                System.Console.WriteLine("У вас уже есть кредит!");
+                return;
+            }else{
+                if(Credit.Credits.haveAnotActualCredit(newAcc.idPassport) == 0){
+                    summ -= 1;
+                }
+                else if(Credit.Credits.haveAnotActualCredit(newAcc.idPassport) <= 2){
+                    summ += 1;
+                }else if(Credit.Credits.haveAnotActualCredit(newAcc.idPassport) >= 3){
+                    summ += 2;
+                }
+            }
+            
             if(newAcc.gender == 'm') summ += 1;
             else summ += 2;
             if(newAcc.martialStatus==1)summ += 1;
@@ -29,6 +43,7 @@ namespace Anketa
             int ageUser1 = 2020-ageUser.Year;
             if(ageUser1 > 25 && ageUser1 <= 35 && ageUser1 > 62)summ+=1;
             else if(ageUser1 > 35 && ageUser1 <= 62) summ += 2;
+            
 
             System.Console.Write("Введите вашу ежемецячную зарплату: ");
             zarplata = int.Parse(Console.ReadLine());
