@@ -41,7 +41,22 @@ namespace RegisterUser
             System.Console.WriteLine("Gender: " + gender);
             System.Console.WriteLine("National: " + nationaly);
             System.Console.WriteLine("Birthday: " + birthDay);
-            System.Console.WriteLine("MartialStatus: " + martialStatus);
+            System.Console.Write("Семейное положение: ");
+            switch (martialStatus)
+            {
+                case 1:
+                System.Console.WriteLine("Холостяк");
+                break;
+                case 2:
+                System.Console.WriteLine("Семянин");
+                break;
+                case 3:
+                System.Console.WriteLine("В разводе");
+                break;
+                case 4:
+                System.Console.WriteLine("Вдова/Вдовец");
+                break;
+            }
             System.Console.WriteLine("idPassport: " + idPassport);
             
         }
@@ -95,8 +110,11 @@ namespace RegisterUser
             System.Console.Write("Birth Day:");
             this.birthDay = Console.ReadLine();
 
-            System.Console.Write("Ma. Status:");
-            this.martialStatus = int.Parse(Console.ReadLine());
+            do{
+                System.Console.Write("Семейнее положение(1.Холостяк,2.Семянин,3.В разводе,4.Вдова/Вдовец): ");
+                this.martialStatus = int.Parse(Console.ReadLine());
+            }while(martialStatus != 1 || martialStatus != 2 || martialStatus != 3 || martialStatus != 4);
+            
 
             System.Console.Write("Nationaly: ");
             this.nationaly = Console.ReadLine();
