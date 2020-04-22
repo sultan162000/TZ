@@ -11,12 +11,12 @@ namespace Credit
             using (SqlCommand command = new SqlCommand(sqlCommand,mssql))
             {
                 SqlDataReader read = command.ExecuteReader();
-                if(read.HasRows){
+                
                     while (read.Read())
                     {
                         return true;
                     }
-                }
+                
                 read.Close();
             }
             mssql.Close();

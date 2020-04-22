@@ -12,11 +12,11 @@ namespace Anketa
         public short historCredit = 0;
 
 
-        public newAnketa(string numberPassport,outUser newAcc){
-            sumOfcredit(numberPassport,newAcc);
+        public newAnketa(outUser newAcc){
+            sumOfcredit(newAcc);
         }
 
-        public void sumOfcredit(string numberPassport,outUser newAcc){
+        public void sumOfcredit(outUser newAcc){
             if(Credit.Credits.haveAactuallCredit(newAcc.idPassport)){
                 System.Console.WriteLine("У вас уже есть кредит!");
                 return;
@@ -30,7 +30,7 @@ namespace Anketa
                     summ += 2;
                 }
             }
-            
+
             if(newAcc.gender == 'm') summ += 1;
             else summ += 2;
             if(newAcc.martialStatus==1)summ += 1;
@@ -65,5 +65,6 @@ namespace Anketa
             System.Console.WriteLine("Рейтинг "+summ);
 
         }
+        
     }
 }

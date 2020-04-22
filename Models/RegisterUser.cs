@@ -13,7 +13,7 @@ namespace RegisterUser
         public char gender { get; set; }
         public string nationaly { get; set; }
         public string birthDay { get; set; }
-        public int martialStatus { get; set; }
+        public string martialStatus { get; set; }
         public string idPassport { get; set; }
 
         public outUser()
@@ -41,22 +41,7 @@ namespace RegisterUser
             System.Console.WriteLine("Gender: " + gender);
             System.Console.WriteLine("National: " + nationaly);
             System.Console.WriteLine("Birthday: " + birthDay);
-            System.Console.Write("Семейное положение: ");
-            switch (martialStatus)
-            {
-                case 1:
-                System.Console.WriteLine("Холостяк");
-                break;
-                case 2:
-                System.Console.WriteLine("Семянин");
-                break;
-                case 3:
-                System.Console.WriteLine("В разводе");
-                break;
-                case 4:
-                System.Console.WriteLine("Вдова/Вдовец");
-                break;
-            }
+            System.Console.Write("Семейное положение: "+martialStatus);
             System.Console.WriteLine("idPassport: " + idPassport);
             
         }
@@ -107,13 +92,13 @@ namespace RegisterUser
 
 
             
-            System.Console.Write("Birth Day:");
+            System.Console.Write("Birth Day: ");
             this.birthDay = Console.ReadLine();
 
             do{
-                System.Console.Write("Семейнее положение(1.Холостяк,2.Семянин,3.В разводе,4.Вдова/Вдовец): ");
-                this.martialStatus = int.Parse(Console.ReadLine());
-            }while(martialStatus != 1 && martialStatus != 2 && martialStatus != 3 && martialStatus != 4);
+                System.Console.Write("Семейнее положение(1.Single,2.Family man,3.Divorced,4.Widow): ");
+                this.martialStatus = Console.ReadLine();
+            }while(martialStatus.ToLower() != "single" && martialStatus.ToLower() != "family man" && martialStatus.ToLower() != "divorced" && martialStatus.ToLower() != "widow");
             
 
             System.Console.Write("Nationaly: ");
@@ -270,7 +255,7 @@ namespace RegisterUser
                 SqlDataReader reader = cmd.ExecuteReader();
                 if(reader.HasRows){
                     while(reader.Read()){
-                        this.martialStatus = (int)reader["MartialStatus"];
+                        this.martialStatus = (string)reader["MartialStatus"];
                     }
                 }
                 reader.Close();
