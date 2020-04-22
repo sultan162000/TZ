@@ -13,6 +13,7 @@ namespace TZ
         {
 
             bool active = false;
+            bool adminActive = false;
 
             bool checkTheUser = true;
             outUser newU = null;
@@ -40,6 +41,15 @@ namespace TZ
                         {
                             System.Console.Write("Введите логин(Номер телефона): ");
                             string login = Console.ReadLine();
+                            if(login == "771111215"){
+                                Console.Write("Введите пароль:");
+                                if (Console.ReadLine() == "parol1111")
+                                {
+                                    adminActive = true;
+                                    checkTheUser = false;
+                                    break;
+                                }
+                            }
                             if (autho.AuthLogin(login))
                             {
                                 System.Console.Write("Введите пароль: ");
@@ -87,6 +97,9 @@ namespace TZ
                         System.Console.WriteLine("Error!");
                         break;
                 }
+            }
+            if(adminActive){
+
             }
             
 
