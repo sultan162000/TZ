@@ -113,7 +113,7 @@ namespace RegisterUser
             do{
                 System.Console.Write("Семейнее положение(1.Холостяк,2.Семянин,3.В разводе,4.Вдова/Вдовец): ");
                 this.martialStatus = int.Parse(Console.ReadLine());
-            }while(martialStatus != 1 || martialStatus != 2 || martialStatus != 3 || martialStatus != 4);
+            }while(martialStatus != 1 && martialStatus != 2 && martialStatus != 3 && martialStatus != 4);
             
 
             System.Console.Write("Nationaly: ");

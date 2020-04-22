@@ -7,9 +7,7 @@ namespace Anketa
         private int summ = 0;
         public int zarplata = 0;
         public int summCredit = 0;
-
         public int creditsFor = 0;
-
         public int srokCredit = 0;
 
 

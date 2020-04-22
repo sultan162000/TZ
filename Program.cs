@@ -14,7 +14,7 @@ namespace TZ
             bool active = false;
 
             bool checkTheUser = true;
-            outUser newU;
+            outUser newU = null;
 
             while (checkTheUser)
             {
@@ -93,7 +93,7 @@ namespace TZ
                 System.Console.Write("1.Взять кредит\n:");
                 switch(int.Parse(Console.ReadLine())){
                     case 1:
-                    newAnketa anket = new newAnketa();
+                    newAnketa anket = new newAnketa(newU.idPassport,newU);
                     break;
                 }
             }
