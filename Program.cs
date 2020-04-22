@@ -2,6 +2,7 @@
 using RegisterUser;
 using AddDocUserInDb;
 using Auth;
+using Anketa;
 
 namespace TZ
 {
@@ -92,7 +93,7 @@ namespace TZ
                 System.Console.Write("1.Взять кредит\n:");
                 switch(int.Parse(Console.ReadLine())){
                     case 1:
-                    
+                    newAnketa anket = new newAnketa();
                     break;
                 }
             }
