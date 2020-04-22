@@ -44,7 +44,7 @@ namespace TZ
                             {
                                 System.Console.Write("Введите пароль: ");
                                 string pass = Console.ReadLine();
-                                if (autho.AuthPass(pass))
+                                if (autho.AuthPass(login,pass))
                                 {
                                     System.Console.WriteLine("Успешно!");
                                     active = true;
@@ -94,7 +94,6 @@ namespace TZ
                 System.Console.Write("1.Взять кредит\n:");
                 switch(int.Parse(Console.ReadLine())){
                     case 1:
-                    newU.showInfo();
                     newAnketa anket = new newAnketa(newU);
                     break;
                 }

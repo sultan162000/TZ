@@ -18,9 +18,10 @@ namespace Auth
             return false;
         }
 
-        public bool AuthPass(string pass)
+        public bool AuthPass(string login,string pass)
         {
-                List<string> passUser = Db.selectThePass();
+                List<string> passUser = new List<string>();
+                passUser.Add(Db.selectThePass(login,pass));
                 if(passUser.Contains(pass)){
                     return true;
                 }

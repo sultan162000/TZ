@@ -29,7 +29,7 @@ namespace AddDocUserInDb
             cmd.Parameters.AddWithValue("@IdPass", forInsert.idPassport);
 
             cmd.ExecuteNonQuery();
-            string sqlCommandStringForAcc = @"Insert into UserAccaount(Login,Password,IdDoc,IdCredit) values(@Login,@Password,@IdDoc,@IdCredit)";
+            string sqlCommandStringForAcc = @"Insert into UserAccaount(Login,Password,IdDoc) values(@Login,@Password,@IdDoc)";
             cmd = new SqlCommand(sqlCommandStringForAcc, mssql);
 
             cmd.Parameters.AddWithValue("@Login", forInsert.login);
@@ -38,9 +38,9 @@ namespace AddDocUserInDb
             if (idForDoc != -1)
             {
                 cmd.Parameters.AddWithValue("@IdDoc", idForDoc);
+            }else{
+                return;
             }
-
-            cmd.Parameters.AddWithValue("@IdCredit", 1);
             cmd.ExecuteNonQuery();
             System.Console.WriteLine("Ok!");
 

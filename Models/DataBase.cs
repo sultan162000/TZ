@@ -45,23 +45,23 @@ namespace DataBase
             return loginUser;
         }
 
-        public static List<string> selectThePass(){
+        public static string selectThePass(string login,string pasUser){
             SqlConnection mssql = new SqlConnection(DBsql.connectionString);
-            List<string> loginUser = new List<string>();
+            pasUser = "";
             mssql.Open();
-            using (SqlCommand command = new SqlCommand("Select Password from UserAccaount", mssql))
+            using (SqlCommand command = new SqlCommand($"Select Password from UserAccaount where Login ='{login}'", mssql))
             {
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        loginUser.Add((string)reader["Password"]);
+                        pasUser = (string)reader["Password"];
                     }
                 }
             }
             mssql.Close();
-            return loginUser;
+            return pasUser;
         }
         
     }

@@ -6,7 +6,7 @@ namespace Credit
     {
         public static bool haveAactuallCredit(string numberPassport){
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            string sqlCommand = $"SELECT Active FROM UserDocument, UserAccaount, Credits, HistoryCredit";
+            string sqlCommand = $"select Active from HistoryCredit h, Credits c, UserAccaount u, UserDocument d where u.IdDoc=d.IdDoc and u.IdCredit = h.IdCredit and d.IdPass ='{numberPassport}'";
             mssql.Open();
             using (SqlCommand command = new SqlCommand(sqlCommand,mssql))
             {

@@ -41,7 +41,7 @@ namespace RegisterUser
             System.Console.WriteLine("Gender: " + gender);
             System.Console.WriteLine("National: " + nationaly);
             System.Console.WriteLine("Birthday: " + birthDay);
-            System.Console.Write("Семейное положение: "+martialStatus);
+            System.Console.WriteLine("Семейное положение: "+martialStatus);
             System.Console.WriteLine("idPassport: " + idPassport);
             
         }
