@@ -34,26 +34,34 @@ namespace AddDocUserInDb
 
             cmd.Parameters.AddWithValue("@Login", forInsert.login);
             cmd.Parameters.AddWithValue("@Password", forInsert.password);
-            int idForDoc = returnIdDoc(forInsert.idPassport);
+            int idForDoc = chetTheIdDoc.returnIdDoc(forInsert.idPassport);
             if (idForDoc != -1)
             {
                 cmd.Parameters.AddWithValue("@IdDoc", idForDoc);
             }
 
-            cmd.Parameters.AddWithValue("@IdCredit", 0);
+            cmd.Parameters.AddWithValue("@IdCredit", 1);
             cmd.ExecuteNonQuery();
             System.Console.WriteLine("Ok!");
 
 
             mssql.Close();
         }
+
+
+    }
+
+    public static class chetTheIdDoc
+    {
         public static int returnIdDoc(string number)
         {
             string newInser = $"select IdDoc from UserDocument where IdPass='{number}'";
             SqlConnection msqql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            SqlCommand cmd = new SqlCommand(newInser, msqql);
+            msqql.Open();
+            SqlCommand cmds = new SqlCommand(newInser, msqql);
+            
             int idForDoc = -1;
-            SqlDataReader read = cmd.ExecuteReader();
+            SqlDataReader read = cmds.ExecuteReader();
             if (read.HasRows)
             {
                 while (read.Read())
@@ -61,11 +69,8 @@ namespace AddDocUserInDb
                     idForDoc = read.GetInt32(0);
                 }
             }
-            read.Close();
-            msqql.Close();
             return idForDoc;
         }
-
     }
 
 
