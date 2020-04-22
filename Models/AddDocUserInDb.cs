@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 using RegisterUser;
+using System;
 
 namespace AddDocUserInDb
 {
@@ -8,31 +9,61 @@ namespace AddDocUserInDb
 
         public static void InsertAuto(outUser forInsert)
         {
+
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
             string sqlCommandString = @"Insert into UserDocument(Name, LastName, MiddleName, Gender, Nationaly, MartialStatus, BirthDay, IdPass) "
                 + "Values(@Name, @LastName, @MiddleName, @Gender, @Nationaly, @MartialStatus, @BirthDay, @IdPass)";
-            mssql.Open();
-            using (SqlCommand cmd = new SqlCommand(sqlCommandString, mssql))
-            {
-                cmd.Parameters.AddWithValue("@Name", forInsert.name);
-                cmd.Parameters.AddWithValue("@LastName", forInsert.lastName);
-                cmd.Parameters.AddWithValue("@MiddleName", forInsert.middleName);
-                cmd.Parameters.AddWithValue("@Gender", forInsert.gender);
-                cmd.Parameters.AddWithValue("@Nationaly", forInsert.nationaly);
-                cmd.Parameters.AddWithValue("@MartialStatus", forInsert.martialStatus);
-                cmd.Parameters.AddWithValue("@BirthDay", forInsert.birthDay);
-                cmd.Parameters.AddWithValue("@IdPass", forInsert.idPassport);
 
-                cmd.ExecuteNonQuery();
-            }
-            string sqlCommandStringForAcc = @"Insert into UserAccaount(Login,Password) values(@Login,@Password)";
-            using (SqlCommand newCmd = new SqlCommand(sqlCommandStringForAcc,mssql))
+            mssql.Open();
+            SqlCommand cmd = new SqlCommand(sqlCommandString, mssql);
+
+
+
+            cmd.Parameters.AddWithValue("@Name", forInsert.name);
+            cmd.Parameters.AddWithValue("@LastName", forInsert.lastName);
+            cmd.Parameters.AddWithValue("@MiddleName", forInsert.middleName);
+            cmd.Parameters.AddWithValue("@Gender", forInsert.gender);
+            cmd.Parameters.AddWithValue("@Nationaly", forInsert.nationaly);
+            cmd.Parameters.AddWithValue("@MartialStatus", forInsert.martialStatus);
+            cmd.Parameters.AddWithValue("@BirthDay", forInsert.birthDay);
+            cmd.Parameters.AddWithValue("@IdPass", forInsert.idPassport);
+
+            cmd.ExecuteNonQuery();
+            string sqlCommandStringForAcc = @"Insert into UserAccaount(Login,Password,IdDoc,IdCredit) values(@Login,@Password,@IdDoc,@IdCredit)";
+            cmd = new SqlCommand(sqlCommandStringForAcc, mssql);
+
+            cmd.Parameters.AddWithValue("@Login", forInsert.login);
+            cmd.Parameters.AddWithValue("@Password", forInsert.password);
+            int idForDoc = returnIdDoc(forInsert.idPassport);
+            if (idForDoc != -1)
             {
-                newCmd.Parameters.AddWithValue("@Login", forInsert.login);
-                newCmd.Parameters.AddWithValue("@Password", forInsert.password);
-                newCmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@IdDoc", idForDoc);
             }
+
+            cmd.Parameters.AddWithValue("@IdCredit", 0);
+            cmd.ExecuteNonQuery();
+            System.Console.WriteLine("Ok!");
+
+
             mssql.Close();
+        }
+        public static int returnIdDoc(string number)
+        {
+            string newInser = $"select IdDoc from UserDocument where IdPass='{number}'";
+            SqlConnection msqql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
+            SqlCommand cmd = new SqlCommand(newInser, msqql);
+            int idForDoc = -1;
+            SqlDataReader read = cmd.ExecuteReader();
+            if (read.HasRows)
+            {
+                while (read.Read())
+                {
+                    idForDoc = read.GetInt32(0);
+                }
+            }
+            read.Close();
+            msqql.Close();
+            return idForDoc;
         }
 
     }

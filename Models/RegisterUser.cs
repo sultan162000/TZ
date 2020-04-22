@@ -177,7 +177,7 @@ namespace RegisterUser
 
         public void inputInAcc(string login, string pass){
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            string comStr = $"select Name from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            string comStr = $"select Name from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             mssql.Open();
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
@@ -189,7 +189,7 @@ namespace RegisterUser
                 }
                 reader.Close();
             }
-            comStr = $"select LastName from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select LastName from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -201,7 +201,7 @@ namespace RegisterUser
                 reader.Close();
             }
 
-            comStr = $"select MiddleName from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select MiddleName from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -213,7 +213,7 @@ namespace RegisterUser
                 reader.Close();
             }
 
-            comStr = $"select Gender from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select Gender from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -225,7 +225,7 @@ namespace RegisterUser
                 reader.Close();
             }
 
-            comStr = $"select Nationaly from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select Nationaly from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -237,7 +237,7 @@ namespace RegisterUser
                 reader.Close();
             }
 
-            comStr = $"select BirthDay from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select BirthDay from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -249,7 +249,7 @@ namespace RegisterUser
                 reader.Close();
             }
 
-            comStr = $"select MartialStatus from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select MartialStatus from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -261,7 +261,7 @@ namespace RegisterUser
                 reader.Close();
             }
 
-            comStr = $"select IdPass from UserDocument, UserAccaount where UserAccaount.Login='{login}'";
+            comStr = $"select IdPass from UserDocument, UserAccaount where UserAccaount.Login='{login}' and UserAccaount.IdDoc=UserDocument.IdDoc";
             using (SqlCommand cmd = new SqlCommand(comStr,mssql))
             {
                 SqlDataReader reader = cmd.ExecuteReader();

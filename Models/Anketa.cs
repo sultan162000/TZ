@@ -33,10 +33,10 @@ namespace Anketa
 
             if(newAcc.gender == 'm') summ += 1;
             else summ += 2;
-            if(newAcc.martialStatus==1)summ += 1;
-            else if(newAcc.martialStatus == 2) summ += 2;
-            else if(newAcc.martialStatus == 3) summ +=1;
-            else if(newAcc.martialStatus == 4) summ += 2;
+            if(newAcc.martialStatus.ToLower()=="single")summ += 1;
+            else if(newAcc.martialStatus.ToLower() == "family man") summ += 2;
+            else if(newAcc.martialStatus.ToLower() == "divorced") summ +=1;
+            else if(newAcc.martialStatus.ToLower() == "widow") summ += 2;
             if(newAcc.nationaly == "TJK") summ += 1;
 
             DateTime ageUser = Convert.ToDateTime(newAcc.birthDay);

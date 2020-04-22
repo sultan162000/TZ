@@ -3,6 +3,7 @@ using RegisterUser;
 using AddDocUserInDb;
 using Auth;
 using Anketa;
+using System.Data.SqlClient;
 
 namespace TZ
 {
@@ -93,6 +94,7 @@ namespace TZ
                 System.Console.Write("1.Взять кредит\n:");
                 switch(int.Parse(Console.ReadLine())){
                     case 1:
+                    newU.showInfo();
                     newAnketa anket = new newAnketa(newU);
                     break;
                 }

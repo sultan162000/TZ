@@ -6,7 +6,7 @@ namespace Credit
     {
         public static bool haveAactuallCredit(string numberPassport){
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            string sqlCommand = $"SELECT Active FROM UserDocument, UserAccaount, Credits, HistoryCredit where  HistoryCredit.IdCredit=Credits.IdCredit and Credits.IdAccs=UserAccaount.IdAcc and UserAccaount.IdDoc = UserDocument.IdDocUser and Active='yes' and UserDocument.IdPass='{numberPassport}'";
+            string sqlCommand = $"SELECT Active FROM UserDocument, UserAccaount, Credits, HistoryCredit";
             mssql.Open();
             using (SqlCommand command = new SqlCommand(sqlCommand,mssql))
             {
@@ -27,7 +27,7 @@ namespace Credit
         public static int haveAnotActualCredit(string numberPassport){
             int count = 0;
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            string sqlCommand = $"SELECT Active FROM UserDocument, UserAccaount, Credits, HistoryCredit where  HistoryCredit.IdCredit=Credits.IdCredit and Credits.IdAccs=UserAccaount.IdAcc and UserAccaount.IdDoc = UserDocument.IdDocUser and Active='no' and UserDocument.IdPass='{numberPassport}'";
+            string sqlCommand = $"SELECT Active FROM UserDocument, UserAccaount, Credits, HistoryCredit";
             mssql.Open();
             using (SqlCommand command = new SqlCommand(sqlCommand,mssql))
             {
