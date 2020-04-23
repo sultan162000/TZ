@@ -1,7 +1,7 @@
 using System;
 using System.Data.SqlClient;
 using RegisterUser;
-
+using ActualCredits;
 namespace Anketa
 {
     public class newAnketa
@@ -20,6 +20,7 @@ namespace Anketa
         public newAnketa(outUser newAcc)
         {
             sumOfcredit(newAcc);
+            showCreditData(newAcc.idPassport);
         }
 
         public int sumOfcredit(outUser newAcc)
@@ -124,7 +125,7 @@ namespace Anketa
 
         }
 
-        public void showCreditData(numberPassport){
+        public void showCreditData(string numberPassport){
             System.Console.WriteLine("Сумма кредита: "+summCredit);
             int sMonthCredit = beginCredint.Month;
             int eMonthCredit = endCredit.Month;
@@ -132,6 +133,7 @@ namespace Anketa
 
             System.Console.WriteLine($"В "+beginCredint.Day+" месяц: "+summCredit/(result/30));
             System.Console.WriteLine("Дата окончание: "+endCredit);
+            System.Console.WriteLine("Пропущенно: "+ActualCredit.checkFailed(numberPassport));
             
 
         }
