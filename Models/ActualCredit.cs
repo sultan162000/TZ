@@ -33,7 +33,7 @@ namespace ActualCredits
             if(read.HasRows){
                 while (read.Read())
                 {
-                    count++;
+                    count = (int)read["Failed"];
                 }
             }
             mssql.Close();

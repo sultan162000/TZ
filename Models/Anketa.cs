@@ -14,13 +14,12 @@ namespace Anketa
 
         public DateTime beginCredint;
         public DateTime endCredit;
-        private short historCredit = 0;
+
 
 
         public newAnketa(outUser newAcc)
         {
             sumOfcredit(newAcc);
-            showCreditData(newAcc.idPassport);
         }
 
         public int sumOfcredit(outUser newAcc)
@@ -28,6 +27,7 @@ namespace Anketa
             if (Credit.Credits.haveAactuallCredit(newAcc.idPassport))
             {
                 System.Console.WriteLine("У вас уже есть кредит!");
+
                 return -1;
             }
             else
@@ -92,7 +92,8 @@ namespace Anketa
         public newAnketa(string numberPassport)
         {
             zapolnenieAnket(numberPassport);
-            showCreditData(numberPassport);
+            if(Credit.Credits.haveAactuallCredit(numberPassport))showCreditData(numberPassport);
+            
         }
 
         public void zapolnenieAnket(string numberPassport)
@@ -131,7 +132,7 @@ namespace Anketa
             int eMonthCredit = endCredit.Month;
             int result = Convert.ToInt32(endCredit.Subtract(beginCredint).ToString("dd"));
 
-            System.Console.WriteLine($"В "+beginCredint.Day+" месяц: "+summCredit/(result/30));
+            System.Console.WriteLine($"В "+beginCredint.Day+"день месяца: "+summCredit/(result/30));
             System.Console.WriteLine("Дата окончание: "+endCredit);
             System.Console.WriteLine("Пропущенно: "+ActualCredit.checkFailed(numberPassport));
             
