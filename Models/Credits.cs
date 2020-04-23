@@ -63,9 +63,9 @@ namespace Credit
                     cmd.ExecuteNonQuery();
                 }
 
-                string updateTable = "Select MAX(IdCredit) from Credits";
+                string slectTheMax = "Select MAX(IdCredit) from Credits";
                 int idDocs =0;
-                using (SqlCommand cmd = new SqlCommand(updateTable,connection))
+                using (SqlCommand cmd = new SqlCommand(slectTheMax,connection))
                 {
                     SqlDataReader read = cmd.ExecuteReader();
                     while (read.Read())
@@ -74,9 +74,18 @@ namespace Credit
                     }
                     read.Close();
                 }
+                string updateTheAcc = $"update UserAccaount set UserAccaount.IdCredit = {idDocs} where UserAccaount.Login='{forReint.login}'";
+                using (SqlCommand cmd = new SqlCommand(updateTheAcc,connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                string updateHistory = $"update HistoryCredit set IdCredit={idDocs}, Active='yes',Failed=0";
+                using (SqlCommand cmd = new SqlCommand(updateHistory,connection))
+                {
+                    cmd.ExecuteNonQuery();
+                }
 
-                
-
+                System.Console.WriteLine("теперь у вас есть кредит!");
                 connection.Close();
 
 
