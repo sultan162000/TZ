@@ -12,8 +12,8 @@ namespace Anketa
         private int creditsFor = 0;
         private int srokCredit = 0;
 
-        private DateTime beginCredint;
-        private DateTime endCredit;
+        public DateTime beginCredint;
+        public DateTime endCredit;
         private short historCredit = 0;
 
 
@@ -91,7 +91,7 @@ namespace Anketa
         public newAnketa(string numberPassport)
         {
             zapolnenieAnket(numberPassport);
-            showCreditData();
+            showCreditData(numberPassport);
         }
 
         public void zapolnenieAnket(string numberPassport)
@@ -124,12 +124,13 @@ namespace Anketa
 
         }
 
-        public void showCreditData(){
+        public void showCreditData(numberPassport){
             System.Console.WriteLine("Сумма кредита: "+summCredit);
             int sMonthCredit = beginCredint.Month;
             int eMonthCredit = endCredit.Month;
             int result = Convert.ToInt32(endCredit.Subtract(beginCredint).ToString("dd"));
-            System.Console.WriteLine("В месяц: "+summCredit/(result/30));
+
+            System.Console.WriteLine($"В "+beginCredint.Day+" месяц: "+summCredit/(result/30));
             System.Console.WriteLine("Дата окончание: "+endCredit);
             
 
