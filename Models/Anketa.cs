@@ -69,6 +69,7 @@ namespace Anketa
 
 
             System.Console.WriteLine("Рейтинг "+summ);
+            Credit.Credits.verificationTheReitingForAdd(summ,summCredit,creditsFor,srokCredit,newAcc);
             return summ;
 
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Data.SqlClient;
 using RegisterUser;
 
@@ -48,6 +49,37 @@ namespace Credit
 
         public static void verificationTheReitingForAdd(int reiting,int summCredit, int creditsFor,int srokCredit, outUser forReint){
             if(reiting>11){
+                SqlConnection connection = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
+                string strConn = "insert into Credits(Sum, MonthCred, CreditFor, EndCreditData) values(@Sum,@MonthCred,@CreditFor,@EndCreditData)";
+                connection.Open();
+                DateTime dateEnd = DateTime.Now;
+                string EndCreditData = Convert.ToString(dateEnd.AddMonths(srokCredit));
+                using(SqlCommand cmd = new SqlCommand(strConn, connection)){
+                    cmd.Parameters.AddWithValue("@Sum",summCredit);
+                    cmd.Parameters.AddWithValue("@MonthCred",DateTime.Now);
+                    cmd.Parameters.AddWithValue("@CreditFor", creditsFor);
+                    cmd.Parameters.AddWithValue("@EndCreditData",EndCreditData);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                string updateTable = "Select MAX(IdCredit) from Credits";
+                int idDocs =0;
+                using (SqlCommand cmd = new SqlCommand(updateTable,connection))
+                {
+                    SqlDataReader read = cmd.ExecuteReader();
+                    while (read.Read())
+                    {
+                        idDocs = (int)read.GetValue(0);
+                    }
+                    read.Close();
+                }
+
+                
+
+                connection.Close();
+
+
 
             }else{
                 System.Console.WriteLine("Извините но мы не можем вам дать кредить т.к вы не соотвествуете правилам!");
