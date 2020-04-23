@@ -5,7 +5,10 @@ namespace ActualCredits
 {
     public class ActualCredit
     {
-        outUser user;
+        string numberPass;
+
+        
+
 
     }
 }

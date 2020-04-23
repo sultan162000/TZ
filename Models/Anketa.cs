@@ -106,10 +106,13 @@ namespace Anketa
                     SqlDataReader read = cmd.ExecuteReader();
                     if (read.HasRows)
                     {
-                        summCredit = Convert.ToDouble(read.GetValue(0));
-                        beginCredint = Convert.ToDateTime(read.GetValue(1));
-                        creditsFor = Convert.ToInt32(read.GetValue(2));
-                        endCredit = Convert.ToDateTime(read.GetValue(3));
+                        while(read.Read()){
+                            summCredit = Convert.ToDouble(read.GetValue(0));
+                            beginCredint = Convert.ToDateTime(read.GetValue(1));
+                            creditsFor = Convert.ToInt32(read.GetValue(2));
+                            endCredit = Convert.ToDateTime(read.GetValue(3));
+                        }
+                        
                     }
                 }
                 mssql.Close();
@@ -123,7 +126,12 @@ namespace Anketa
 
         public void showCreditData(){
             System.Console.WriteLine("Сумма кредита: "+summCredit);
+            int sMonthCredit = beginCredint.Month;
+            int eMonthCredit = endCredit.Month;
+            int result = Convert.ToInt32(endCredit.Subtract(beginCredint).ToString("dd"));
+            System.Console.WriteLine("В месяц: "+summCredit/(result/30));
             System.Console.WriteLine("Дата окончание: "+endCredit);
+            
 
         }
 
