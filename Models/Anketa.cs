@@ -106,10 +106,10 @@ namespace Anketa
                     SqlDataReader read = cmd.ExecuteReader();
                     if (read.HasRows)
                     {
-                        summCredit = Convert.ToDouble(read.GetName(0));
-                        beginCredint = Convert.ToDateTime(read.GetName(1));
-                        creditsFor = Convert.ToInt32(read.GetName(2));
-                        endCredit = Convert.ToDateTime(read.GetName(3));
+                        summCredit = Convert.ToDouble(read.GetValue(0));
+                        beginCredint = Convert.ToDateTime(read.GetValue(1));
+                        creditsFor = Convert.ToInt32(read.GetValue(2));
+                        endCredit = Convert.ToDateTime(read.GetValue(3));
                     }
                 }
                 mssql.Close();
