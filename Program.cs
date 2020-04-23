@@ -117,7 +117,7 @@ namespace TZ
             if (active)
             {
                 bool checkWhile = true;
-                while (true)
+                while (checkWhile)
                 {
                     System.Console.Write("1.Взять кредит\n2.Показат кредит\n:");
                     switch (int.Parse(Console.ReadLine()))
@@ -126,7 +126,7 @@ namespace TZ
                             newAnketa anket = new newAnketa(newU);
                             break;
                         case 2:
-
+                            newAnketa showAnk = new newAnketa(newU.idPassport);
                             break;
                         case 3:
                             checkWhile = false;
