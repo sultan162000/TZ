@@ -16,10 +16,10 @@ namespace Anketa
             sumOfcredit(newAcc);
         }
 
-        public void sumOfcredit(outUser newAcc){
+        public int sumOfcredit(outUser newAcc){
             if(Credit.Credits.haveAactuallCredit(newAcc.idPassport)){
                 System.Console.WriteLine("У вас уже есть кредит!");
-                return;
+                return -1;
             }else{
                 if(Credit.Credits.haveAnotActualCredit(newAcc.idPassport) == 0){
                     
@@ -50,10 +50,12 @@ namespace Anketa
 
             System.Console.WriteLine("Введите сумму кредита: ");
             summCredit = int.Parse(Console.ReadLine());
-            if((summCredit*100/zarplata)<80)summ+=4;
-            else if((summCredit*100/zarplata)>=80 && (summCredit*100/zarplata)<150)summ+=3;
-            else if((summCredit*100/zarplata)>=150 && (summCredit*100/zarplata) <250)summ+=2;
-            else if((summCredit*100/zarplata) >= 250) summ+=1;
+
+            int resultSumCredit = (summCredit*100/zarplata);
+            if(resultSumCredit<80)summ+=4;
+            else if(resultSumCredit>=80 && resultSumCredit<150)summ+=3;
+            else if(resultSumCredit>=150 && resultSumCredit <250)summ+=2;
+            else if(resultSumCredit >= 250) summ+=1;
 
             System.Console.Write("Цель кредита(1.Бытовая техника,2.Ремонт,3.Телефон,4.Прочее): ");
             creditsFor = int.Parse(Console.ReadLine());
@@ -67,8 +69,11 @@ namespace Anketa
 
 
             System.Console.WriteLine("Рейтинг "+summ);
+            return summ;
 
         }
+
+        
         
     }
 }

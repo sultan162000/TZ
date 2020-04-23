@@ -1,4 +1,5 @@
 using System.Data.SqlClient;
+using RegisterUser;
 
 namespace Credit
 {
@@ -6,7 +7,7 @@ namespace Credit
     {
         public static bool haveAactuallCredit(string numberPassport){
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            string sqlCommand = $"select Active from HistoryCredit h, Credits c, UserAccaount u, UserDocument d where u.IdDoc=d.IdDoc and u.IdCredit = h.IdCredit and d.IdPass ='{numberPassport}'";
+            string sqlCommand = $"select Active from HistoryCredit h, Credits c, UserAccaount u, UserDocument d where u.IdDoc=d.IdDoc and u.IdCredit = h.IdCredit and d.IdPass ='{numberPassport}' and h.Active ='yes'";
             mssql.Open();
             using (SqlCommand command = new SqlCommand(sqlCommand,mssql))
             {
@@ -27,7 +28,7 @@ namespace Credit
         public static int haveAnotActualCredit(string numberPassport){
             int count = 0;
             SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
-            string sqlCommand = $"SELECT Active FROM UserDocument, UserAccaount, Credits, HistoryCredit";
+            string sqlCommand = $"select Active from HistoryCredit h, Credits c, UserAccaount u, UserDocument d where u.IdDoc=d.IdDoc and u.IdCredit = h.IdCredit and d.IdPass ='{numberPassport}' and h.Active ='no'";
             mssql.Open();
             using (SqlCommand command = new SqlCommand(sqlCommand,mssql))
             {
@@ -44,5 +45,15 @@ namespace Credit
             return count;
             
         }
+
+        public static void verificationTheReitingForAdd(int reiting,int summCredit, int creditsFor,int srokCredit, outUser forReint){
+            if(reiting>11){
+
+            }else{
+                System.Console.WriteLine("Извините но мы не можем вам дать кредить т.к вы не соотвествуете правилам!");
+            }
+        }
+
+        
     }
 }

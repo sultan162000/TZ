@@ -41,7 +41,7 @@ namespace TZ
                         {
                             System.Console.Write("Введите логин(Номер телефона): ");
                             string login = Console.ReadLine();
-                            if(login == "771111215"){
+                            if(login == "7711112"){
                                 Console.Write("Введите пароль:");
                                 if (Console.ReadLine() == "parol1111")
                                 {
