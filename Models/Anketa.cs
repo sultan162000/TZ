@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlClient;
 using RegisterUser;
 
 namespace Anketa
@@ -9,6 +10,9 @@ namespace Anketa
         public int summCredit = 0;
         public int creditsFor = 0;
         public int srokCredit = 0;
+
+        public DateTime beginCredint;
+        public DateTime endCredit;
         public short historCredit = 0;
 
 
@@ -74,7 +78,19 @@ namespace Anketa
 
         }
 
-        
+        public newAnketa(string numberPassport){
+
+        }
+
+        public void zapolnenieAnket(string numberPassport){
+            SqlConnection mssql = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
+            string strConect = $"select c.Sum, c.MonthCred, c.CreditFor, c.EndCreditData from Credits c, UserDocument u, UserAccaount a where u.IdDoc=a.IdDoc and c.IdCredit=a.IdCredit and u.IdPass='{numberPassport}'";
+            using(SqlCommand cmd = new SqlCommand(strConect,mssql)){
+                SqlDataReader read = cmd.ExecuteReader();
+                
+            }
+
+        }
         
     }
 }

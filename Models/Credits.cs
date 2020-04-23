@@ -48,7 +48,7 @@ namespace Credit
         }
 
         public static void verificationTheReitingForAdd(int reiting,int summCredit, int creditsFor,int srokCredit, outUser forReint){
-            if(reiting>11){
+            if(reiting>10){
                 SqlConnection connection = new SqlConnection(TZ.DataAccess.DBsql.connectionString);
                 string strConn = "insert into Credits(Sum, MonthCred, CreditFor, EndCreditData) values(@Sum,@MonthCred,@CreditFor,@EndCreditData)";
                 connection.Open();
@@ -85,7 +85,7 @@ namespace Credit
                     cmd.ExecuteNonQuery();
                 }
 
-                System.Console.WriteLine("теперь у вас есть кредит!");
+                System.Console.WriteLine("Теперь у вас есть кредит!");
                 connection.Close();
 
 

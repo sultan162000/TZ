@@ -92,7 +92,7 @@ namespace RegisterUser
 
 
             
-            System.Console.Write("Birth Day: ");
+            System.Console.Write("День рождение(день.месяц.год): ");
             this.birthDay = Console.ReadLine();
 
             do{

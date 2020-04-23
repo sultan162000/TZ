@@ -41,7 +41,8 @@ namespace TZ
                         {
                             System.Console.Write("Введите логин(Номер телефона): ");
                             string login = Console.ReadLine();
-                            if(login == "7711112"){
+                            if (login == "7711112")
+                            {
                                 Console.Write("Введите пароль:");
                                 if (Console.ReadLine() == "parol1111")
                                 {
@@ -54,11 +55,11 @@ namespace TZ
                             {
                                 System.Console.Write("Введите пароль: ");
                                 string pass = Console.ReadLine();
-                                if (autho.AuthPass(login,pass))
+                                if (autho.AuthPass(login, pass))
                                 {
                                     System.Console.WriteLine("Успешно!");
                                     active = true;
-                                    newU = new outUser(login,pass);
+                                    newU = new outUser(login, pass);
                                     break;
                                 }
                                 else
@@ -85,7 +86,16 @@ namespace TZ
                         }
                         else
                         {
-                            AddUserInDb.InsertAuto(newU);
+                            try
+                            {
+                                AddUserInDb.InsertAuto(newU);
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Console.WriteLine(ex.Message);
+                                break;
+                            }
+
                         }
                         if (!(newU is null))
                         {
@@ -98,17 +108,30 @@ namespace TZ
                         break;
                 }
             }
-            if(adminActive){
+            if (adminActive)
+            {
 
             }
-            
 
-            if(active){
-                System.Console.Write("1.Взять кредит\n:");
-                switch(int.Parse(Console.ReadLine())){
-                    case 1:
-                    newAnketa anket = new newAnketa(newU);
-                    break;
+
+            if (active)
+            {
+                bool checkWhile = true;
+                while (true)
+                {
+                    System.Console.Write("1.Взять кредит\n2.Показат кредит\n:");
+                    switch (int.Parse(Console.ReadLine()))
+                    {
+                        case 1:
+                            newAnketa anket = new newAnketa(newU);
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+                            checkWhile = false;
+                            break;
+                    }
                 }
             }
 
